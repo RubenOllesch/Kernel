@@ -7,4 +7,4 @@ start:
 	qemu-system-x86_64 -kernel myos.bin
 
 clean:
-	rm *.o
+	rm *.o *.bin
