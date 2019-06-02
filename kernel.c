@@ -32,11 +32,6 @@ enum vga_color {
 	VGA_COLOR_WHITE = 15,
 };
 
-static inline uint16_t vga_entry(unsigned char uc, uint8_t color)
-{
-	return (uint16_t) uc | (uint16_t) color << 8;
-}
-
 size_t strlen(const char* str)
 {
 	size_t len = 0;
@@ -58,6 +53,12 @@ void terminal_setcolor(enum vga_color fg, enum vga_color bg)
 	terminal_color = fg | bg << 4;
 }
 
+void terminal_putentryat(char c, size_t x, size_t y)
+{
+	const size_t index = y * VGA_WIDTH + x;
+	terminal_buffer[index] = c | terminal_color << 8;
+}
+
 void terminal_initialize(void)
 {
 	terminal_row = 0;
@@ -66,16 +67,9 @@ void terminal_initialize(void)
 	terminal_buffer = (uint16_t*) 0xB8000;
 	for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
-			const size_t index = y * VGA_WIDTH + x;
-			terminal_buffer[index] = vga_entry(' ', terminal_color);
+			terminal_putentryat(0, x, y);
 		}
 	}
-}
-
-void terminal_putentryat(char c, size_t x, size_t y)
-{
-	const size_t index = y * VGA_WIDTH + x;
-	terminal_buffer[index] = vga_entry(c, terminal_color);
 }
 
 void terminal_putchar(char c)
