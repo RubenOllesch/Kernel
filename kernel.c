@@ -99,15 +99,11 @@ void terminal_putchar(char c)
 	}
 }
 
-void terminal_write(const char* data, size_t size)
+void terminal_print(const char* data)
 {
-	for (size_t i = 0; i < size; i++)
-		terminal_putchar(data[i]);
-}
-
-void terminal_writestring(const char* data)
-{
-	terminal_write(data, strlen(data));
+	while(*data) {
+		terminal_putchar(*data++);
+	}
 }
 
 void kernel_main(void)
@@ -115,5 +111,5 @@ void kernel_main(void)
 	/* Initialize terminal interface */
 	terminal_initialize();
 
-	terminal_writestring("Hello, kernel World!\n");
+	terminal_print("Hello, kernel World!\n");
 }
