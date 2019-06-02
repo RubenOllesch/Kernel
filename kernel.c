@@ -43,10 +43,10 @@ size_t strlen(const char* str)
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
+static uint16_t* terminal_buffer = (uint16_t*) 0xB8000;
 size_t terminal_row;
 size_t terminal_column;
 uint8_t terminal_color;
-uint16_t* terminal_buffer;
 
 void terminal_setcolor(enum vga_color fg, enum vga_color bg)
 {
@@ -64,7 +64,6 @@ void terminal_initialize(void)
 	terminal_row = 0;
 	terminal_column = 0;
 	terminal_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
-	terminal_buffer = (uint16_t*) 0xB8000;
 	for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
 			terminal_putentryat(0, x, y);
