@@ -48,6 +48,11 @@ size_t terminal_row;
 size_t terminal_column;
 uint8_t terminal_color;
 
+static inline size_t term_index(size_t x, size_t y)
+{
+	return y * VGA_WIDTH + x;
+}
+
 void terminal_setcolor(enum vga_color fg, enum vga_color bg)
 {
 	terminal_color = fg | bg << 4;
@@ -55,20 +60,19 @@ void terminal_setcolor(enum vga_color fg, enum vga_color bg)
 
 void terminal_putentryat(char c, size_t x, size_t y)
 {
-	const size_t index = y * VGA_WIDTH + x;
-	terminal_buffer[index] = c | terminal_color << 8;
+	terminal_buffer[term_index(x, y)] = c | terminal_color << 8;
 }
 
 void terminal_scroll(void)
 {
 	for (size_t row = 0; row < VGA_HEIGHT - 1; row++) {
 		for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++) {
-			terminal_buffer[row * VGA_WIDTH + clmn] = terminal_buffer[(row + 1) * VGA_WIDTH + clmn];
-		}	
+			terminal_buffer[term_index(clmn, row)] = terminal_buffer[term_index(clmn, row + 1)];
+		}
 	}
 	
 	for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++)
-		terminal_buffer[(VGA_HEIGHT - 1) * VGA_WIDTH + clmn] = 0;
+		terminal_buffer[term_index(clmn, VGA_HEIGHT - 1)] = 0;
 	
 	terminal_row--;
 }
