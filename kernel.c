@@ -119,5 +119,27 @@ void kernel_main(void)
 	terminal_init();
 
 
-	print("Hello, World\n");
+	term_setcolor(VGA_WHITE, VGA_BLACK);
+
+	print("Hello, World!\n\n");
+
+
+	term_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
+
+	print("This is a nice day");
+
+	print("\n\n");
+
+	term_setcolor(VGA_BLACK, VGA_WHITE);
+
+	print(" B L A C K \n");
+	print("   O   N   \n");
+	print(" W H I T E \n");
+
+
+	term_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
+
+	print("\n\n");
+
+	print("Have a nice day");
 }
