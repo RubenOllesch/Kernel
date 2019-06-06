@@ -9,5 +9,12 @@ myos:	kernel.c boot.S linker.ld
 start:
 	qemu-system-x86_64 -kernel myos.bin
 
+iso:
+	mkdir -p isodir/boot/grub
+	cp myos.bin isodir/boot/
+	cp grub.cfg isodir/boot/grub/
+	grub-mkrescue -o myos.iso isodir
+
 clean:
-	find . -type f \( -name '*.o' -o -name '*.bin' \) -exec rm {} \;
+	find . -type f \( -name '*.o' -o -name '*.bin' -o -name '*.iso' \) -exec rm {} \;
+	rm -rf isodir
