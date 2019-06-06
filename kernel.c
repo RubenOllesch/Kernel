@@ -59,6 +59,20 @@ void terminal_putentryat(char c, size_t x, size_t y)
 	terminal_buffer[index] = c | terminal_color << 8;
 }
 
+void terminal_scroll(void)
+{
+	for (size_t row = 0; row < VGA_HEIGHT - 1; row++) {
+		for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++) {
+			terminal_buffer[row * VGA_WIDTH + clmn] = terminal_buffer[(row + 1) * VGA_WIDTH + clmn];
+		}	
+	}
+	
+	for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++)
+		terminal_buffer[(VGA_HEIGHT - 1) * VGA_WIDTH + clmn] = 0;
+	
+	terminal_row--;
+}
+
 void terminal_initialize(void)
 {
 	terminal_row = 0;
@@ -86,7 +100,7 @@ void terminal_putchar(char c)
 
 
 	if (terminal_row == VGA_HEIGHT)
-		terminal_row = 0;
+		terminal_scroll();
 }
 
 void terminal_print(const char* data)
