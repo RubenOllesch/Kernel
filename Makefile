@@ -10,4 +10,4 @@ start:
 	qemu-system-x86_64 -kernel myos.bin
 
 clean:
-	rm *.o *.bin
+	find . -type f \( -name '*.o' -o -name '*.bin' \) -exec rm {} \;
