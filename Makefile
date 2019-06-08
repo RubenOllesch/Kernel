@@ -6,10 +6,10 @@ myos:	kernel.c boot.S linker.ld
 	$(CC) -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 	$(CC) -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc
 
-start:
+start:	myos
 	qemu-system-x86_64 -kernel myos.bin
 
-iso:
+iso:	myos
 	mkdir -p isodir/boot/grub
 	cp myos.bin isodir/boot/
 	cp grub.cfg isodir/boot/grub/
