@@ -32,13 +32,6 @@ enum vga_color {
 	VGA_WHITE = 15,
 };
 
-size_t strlen(const char* str)
-{
-	size_t len = 0;
-	while (str[len])
-		len++;
-	return len;
-}
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
