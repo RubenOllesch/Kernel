@@ -65,11 +65,9 @@ void term_putentryat(char c, size_t x, size_t y)
 
 void term_scroll(void)
 {
-	for (size_t row = 0; row < VGA_HEIGHT - 1; row++) {
-		for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++) {
+	for (size_t row = 0; row < VGA_HEIGHT - 1; row++)
+		for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++)
 			term_buff[term_index(clmn, row)] = term_buff[term_index(clmn, row + 1)];
-		}
-	}
 	
 	for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++)
 		term_buff[term_index(clmn, VGA_HEIGHT - 1)] = 0;
@@ -82,11 +80,9 @@ void terminal_init(void)
 	term_row = 0;
 	term_column = 0;
 	term_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
-	for (size_t y = 0; y < VGA_HEIGHT; y++) {
-		for (size_t x = 0; x < VGA_WIDTH; x++) {
+	for (size_t y = 0; y < VGA_HEIGHT; y++)
+		for (size_t x = 0; x < VGA_WIDTH; x++)
 			term_putentryat(0, x, y);
-		}
-	}
 }
 
 void term_putchar(char c)
@@ -109,9 +105,8 @@ void term_putchar(char c)
 
 void print(const char* data)
 {
-	while(*data) {
+	while(*data)
 		term_putchar(*data++);
-	}
 }
 
 void kernel_main(void)
