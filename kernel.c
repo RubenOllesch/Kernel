@@ -36,7 +36,7 @@ enum vga_color {
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
-static uint16_t* term_buff = (uint16_t*) 0xB8000;
+static uint16_t *term_buff = (uint16_t*) 0xB8000;
 size_t term_row;
 size_t term_column;
 uint8_t term_color;
@@ -96,7 +96,7 @@ void term_putchar(char c)
 		term_scroll();
 }
 
-void print(const char* data)
+void print(const char *data)
 {
 	while(*data)
 		term_putchar(*data++);
