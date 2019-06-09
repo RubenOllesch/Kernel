@@ -9,6 +9,7 @@ all:		myos.bin
 
 myos.bin:	$(OBJ) linker.ld
 		@$(CC) -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc terminal.c
+		@grub-file --is-x86-multiboot myos.bin
 
 $(OBJ):		kernel.c boot.S
 		@$(AS) boot.S -o boot.o
