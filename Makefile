@@ -8,7 +8,7 @@ OBJ=kernel.o boot.o
 all:		myos.bin
 
 myos.bin:	$(OBJ)
-		@$(CC) -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc
+		@$(CC) -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc terminal.c
 
 $(OBJ):		kernel.c boot.S linker.ld
 		@$(AS) boot.S -o boot.o
