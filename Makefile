@@ -16,8 +16,8 @@ myos.bin:	$(OBJ) linker.ld
 %.o:		%.c
 		@$(CC) -MD -c $< -o $@ $(CFLAGS) -std=gnu99 
 
-start:		all
-		@qemu-system-x86_64 -kernel myos.bin
+start:		iso
+		@qemu-system-x86_64 -cdrom myos.iso
 
 iso:		all
 		@mkdir -p isodir/boot/grub
