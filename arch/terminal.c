@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "../include/terminal.h"
+#include "terminal.h"
 
 
 static const size_t VGA_WIDTH = 80;

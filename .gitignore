@@ -3,4 +3,5 @@
 *.bin
 *.iso
 isodir
+sysroot
 .vscode
