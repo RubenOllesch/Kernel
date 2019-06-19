@@ -2,12 +2,20 @@
 
 CC=i686-elf-gcc
 CFLAGS=-ffreestanding -O2 -Wall -Wextra
-OBJ=kernel.o boot.o
+
+ARCHDIR=arch
+INCLUDEDIR=include
+
+OBJ=kernel/kernel.o \
+	$(ARCHDIR)/boot.o \
+	$(ARCHDIR)/terminal.o
+
+
 
 all:		myos.bin
 
-myos.bin:	$(OBJ) linker.ld
-		@$(CC) -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc terminal.c
+myos.bin:	$(OBJ) $(ARCHDIR)/linker.ld
+		@$(CC) -T $(ARCHDIR)/linker.ld -o myos.bin -ffreestanding -O2 -nostdlib -lgcc $(OBJ)
 		@grub-file --is-x86-multiboot myos.bin
 
 %.o:		%.S
