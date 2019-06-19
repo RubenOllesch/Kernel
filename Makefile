@@ -48,14 +48,13 @@ myos.bin:	$(OBJ) $(ARCHDIR)/linker.ld
 	@$(CC) -MD -c $< -o $@ $(CFLAGS) -std=gnu99
 
 iso:	all
-	@mkdir -p isodir/boot/grub
-	@cp $(SYSROOT)/$(BOOTDIR)/myos.bin isodir/boot/
-	@cp grub.cfg isodir/boot/grub/
-	@grub-mkrescue -o myos.iso isodir
+	@mkdir -p $(SYSROOT)/$(BOOTDIR)/grub
+	@cp grub.cfg $(SYSROOT)/$(BOOTDIR)/grub/
+	@grub-mkrescue -o myos.iso $(SYSROOT)
 
 start: iso
 	@qemu-system-i386 -cdrom myos.iso
 
 clean:
 	@find . -type f \( -name '*.o' -o -name '*.bin' -o -name '*.d' -o -name '*.iso' \) -exec rm {} \;
-	@rm -rf isodir sysroot
+	@rm -rf sysroot
