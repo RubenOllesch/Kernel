@@ -24,22 +24,10 @@ void kernel_main(void)
 	print("Hello, World!\n\n");
 
 
-	term_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
-
-	print("This is a nice day");
-
-	print("\n\n");
-
-	term_setcolor(VGA_BLACK, VGA_WHITE);
-
-	print(" B L A C K \n");
-	print("   O   N   \n");
-	print(" W H I T E \n");
-
-
-	term_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
-
-	print("\n\n");
-
-	print("Have a nice day");
+	for (size_t i; i < 16; ++i) {
+		term_setcolor(i, VGA_BLACK);
+		print("Colored Text on Black ");
+		term_setcolor(VGA_BLACK, i);
+		print("Black Text on Colored Background\n");
+	}
 }
