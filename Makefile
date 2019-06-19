@@ -49,7 +49,7 @@ myos.bin:	$(OBJ) $(ARCHDIR)/linker.ld
 
 iso:	all
 	@mkdir -p $(SYSROOT)/$(BOOTDIR)/grub
-	@cp grub.cfg $(SYSROOT)/$(BOOTDIR)/grub/
+	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}'	> $(SYSROOT)/$(BOOTDIR)/grub/grub.cfg
 	@grub-mkrescue -o myos.iso $(SYSROOT)
 
 start: iso
