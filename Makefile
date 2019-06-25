@@ -57,4 +57,4 @@ start: iso
 
 clean:
 	@find . -type f \( -name '*.o' -o -name '*.bin' -o -name '*.d' -o -name '*.iso' \) -exec rm {} \;
-	@rm -rf sysroot
+	@rm -rf $(SYSROOT)
