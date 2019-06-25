@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "terminal.h"
+#include "kernel/tty.h"
 
 
 static const size_t VGA_WIDTH = 80;
@@ -18,7 +18,7 @@ static inline size_t term_index(size_t x, size_t y)
 	return y * VGA_WIDTH + x;
 }
 
-void term_setcolor(enum vga_color fg, enum vga_color bg)
+void tty_setcolor(enum vga_color fg, enum vga_color bg)
 {
 	term_color = fg | bg << 4;
 }
@@ -28,7 +28,7 @@ static void term_putentryat(char c, size_t x, size_t y)
 	term_buff[term_index(x, y)] = c | term_color << 8;
 }
 
-void term_scroll(void)
+void tty_scroll(void)
 {
 	for (size_t row = 0; row < VGA_HEIGHT - 1; row++)
 		for (size_t clmn = 0; clmn < VGA_WIDTH; clmn++)
@@ -40,11 +40,11 @@ void term_scroll(void)
 	term_row--;
 }
 
-void terminal_init(void)
+void tty_init(void)
 {
 	term_row = 0;
 	term_column = 0;
-	term_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
+	tty_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
 	for (size_t y = 0; y < VGA_HEIGHT; y++)
 		for (size_t x = 0; x < VGA_WIDTH; x++)
 			term_putentryat(0, x, y);
@@ -65,10 +65,10 @@ static void term_putchar(char c)
 
 
 	if (term_row == VGA_HEIGHT)
-		term_scroll();
+		tty_scroll();
 }
 
-void print(const char *data)
+void tty_print(const char *data)
 {
 	while(*data)
 		term_putchar(*data++);

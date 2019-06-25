@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "terminal.h"
+#include "kernel/tty.h"
 
 /* Check if the compiler thinks you are targeting the wrong operating system. */
 #if defined(__linux__)
@@ -16,18 +16,18 @@
 
 void kernel_main(void)
 {
-	terminal_init();
+	tty_init();
 
 
-	term_setcolor(VGA_WHITE, VGA_BLACK);
+	tty_setcolor(VGA_WHITE, VGA_BLACK);
 
-	print("Hello, World!\n\n");
+	tty_print("Hello, World!\n\n");
 
 
 	for (size_t i; i < 16; ++i) {
-		term_setcolor(i, VGA_BLACK);
-		print("Colored Text on Black ");
-		term_setcolor(VGA_BLACK, i);
-		print("Black Text on Colored Background\n");
+		tty_setcolor(i, VGA_BLACK);
+		tty_print("Colored Text on Black ");
+		tty_setcolor(VGA_BLACK, i);
+		tty_print("Black Text on Colored Background\n");
 	}
 }

@@ -23,7 +23,7 @@ ARCHDIR=arch
 
 OBJ=kernel/kernel.o \
 	$(ARCHDIR)/boot.o \
-	$(ARCHDIR)/terminal.o
+	$(ARCHDIR)/tty.o
 
 
 
