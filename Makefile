@@ -1,4 +1,4 @@
-CFLAGS?=-Wall -Wextra -O2
+CFLAGS?=-O2 -Wall -Wextra -Wpedantic
 
 HOST=i686-elf
 SYSROOT=$(PWD)/sysroot
