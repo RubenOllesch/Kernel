@@ -26,6 +26,14 @@ int printf(const char *format, ...)
 				putchar(va_arg(parameters, int));
 				written++;
 				break;
+			case 's':
+				isInFormat = false;
+				const char *str = va_arg(parameters, const char*);
+				while (*str) {
+					putchar(*str++);
+					written++;
+				}
+				break;
 			}
 		} else {
 			if (c == '%') {
@@ -38,7 +46,7 @@ int printf(const char *format, ...)
 		}
 	}
 
-  	va_end(parameters);
+	va_end(parameters);
 
 	return written;
 }
