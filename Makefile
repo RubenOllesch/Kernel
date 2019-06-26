@@ -10,42 +10,29 @@ BOOTDIR=/boot
 INCLUDEDIR=$(PREFIX)/include
 LIBDIR=$(PREFIX)/lib
 
+PROJECTDIRS=libc kernel
+
 CC=$(HOST)-gcc
 CC:=$(CC) --sysroot=$(SYSROOT)
 # Work around because the -elf utils were not build with --with-sysroot
 CC:=$(CC) -isystem=$(INCLUDEDIR)
 
+CFLAGS:=$(CFLAGS) -ffreestanding
+
 export 
 
-CFLAGS=$(CLFLAGS) -ffreestanding
 
-ARCHDIR=arch
-
-OBJ=kernel/kernel.o \
-	$(ARCHDIR)/boot.o \
-	$(ARCHDIR)/tty.o
-
-
-
-all:	install-headers install-kernel
+all:	install-headers install
 
 install-headers:
-	@mkdir -p $(SYSROOT)/$(INCLUDEDIR)
-	@cp -R --preserve=timestamps include/. $(SYSROOT)/$(INCLUDEDIR)/.
+	@for dir in $(PROJECTDIRS); do \
+		$(MAKE) -C $$dir install-headers; \
+	done
 
-install-kernel: myos.bin
-	@mkdir -p $(SYSROOT)/$(BOOTDIR)
-	@cp myos.bin $(SYSROOT)/$(BOOTDIR)
-
-myos.bin:	$(OBJ) $(ARCHDIR)/linker.ld
-	@$(CC) -T $(ARCHDIR)/linker.ld -o myos.bin -ffreestanding -O2 -nostdlib -lgcc $(OBJ)
-	@grub-file --is-x86-multiboot myos.bin
-
-%.o:	%.S
-	@$(CC) -MD -c $< -o $@ $(CFLAGS)
-
-%.o:	%.c
-	@$(CC) -MD -c $< -o $@ $(CFLAGS) -std=gnu99
+install:
+	@for dir in $(PROJECTDIRS); do \
+		$(MAKE) -C $$dir install; \
+	done
 
 iso:	all
 	@mkdir -p $(SYSROOT)/$(BOOTDIR)/grub
@@ -56,5 +43,5 @@ start: iso
 	@qemu-system-i386 -cdrom myos.iso
 
 clean:
-	@find . -type f \( -name '*.o' -o -name '*.bin' -o -name '*.d' -o -name '*.iso' \) -exec rm {} \;
+	@find . -type f \( -name '*.o' -o -name '*.bin' -o -name '*.d' -o -name '*.iso' -o -name '*.a' \) -exec rm {} \;
 	@rm -rf $(SYSROOT)
