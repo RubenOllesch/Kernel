@@ -25,7 +25,7 @@ void kernel_main(void)
 	puts("Hello, World!\n");
 
 
-	for (size_t i; i < 16; ++i) {
+	for (size_t i = 0; i < 16; ++i) {
 		tty_setcolor(i, VGA_BLACK);
 		puts("Colored Text on Black ");
 		tty_setcolor(VGA_BLACK, i);
