@@ -21,6 +21,11 @@ int printf(const char *format, ...)
 				putchar('%');
 				written++;
 				break;
+			case 'c':
+				isInFormat = false;
+				putchar(va_arg(parameters, int));
+				written++;
+				break;
 			}
 		} else {
 			if (c == '%') {
