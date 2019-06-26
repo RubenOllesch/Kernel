@@ -18,7 +18,7 @@ install:	myos.bin
 	@cp myos.bin $(SYSROOT)/$(BOOTDIR)
 
 myos.bin:	$(OBJ) $(ARCHDIR)/linker.ld
-	$(CC) -T $(ARCHDIR)/linker.ld -o myos.bin -ffreestanding -O2 $(OBJ) $(LIBS)
+	@$(CC) -T $(ARCHDIR)/linker.ld -o myos.bin -ffreestanding -O2 $(OBJ) $(LIBS)
 	@grub-file --is-x86-multiboot myos.bin
 
 %.o:	%.S
