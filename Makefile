@@ -42,7 +42,7 @@ start: myos.iso
 	@qemu-system-i386 -cdrom myos.iso
 
 
-debug: CFLAGS:=$(CFLAGS) -g
+debug: CFLAGS:=$(CFLAGS) -ggdb3 -O0
 debug: myos.iso
 	@qemu-system-i386 -s -S -cdrom myos.iso &
 	@sleep 0.5
