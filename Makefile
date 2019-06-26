@@ -26,15 +26,16 @@ all:	install-headers install
 
 install-headers:
 	@for dir in $(PROJECTDIRS); do \
-		$(MAKE) -C $$dir install-headers; \
+		$(MAKE) --no-print-directory -C $$dir install-headers; \
 	done
 
 install:
 	@for dir in $(PROJECTDIRS); do \
-		$(MAKE) -C $$dir install; \
+		$(MAKE) --no-print-directory -C $$dir install; \
 	done
 
 iso:	all
+	@echo "Creating kernel ISO image..."
 	@mkdir -p $(SYSROOT)/$(BOOTDIR)/grub
 	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}'	> $(SYSROOT)/$(BOOTDIR)/grub/grub.cfg
 	@grub-mkrescue -o myos.iso $(SYSROOT)
