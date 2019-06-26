@@ -4,7 +4,8 @@ LIBS=libk.a
 
 FREEOBJS=stdio/puts.o \
 	stdio/putchar.o \
-	stdio/printf.o
+	stdio/printf.o \
+	stdlib/abort.o
 
 HOSTEDOBJS=
 
