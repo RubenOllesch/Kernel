@@ -41,6 +41,13 @@ myos.iso:	all
 start: myos.iso
 	@qemu-system-i386 -cdrom myos.iso
 
+
+debug: CFLAGS:=$(CFLAGS) -g
+debug: myos.iso
+	@qemu-system-i386 -s -S -cdrom myos.iso &
+	@sleep 0.5
+	@gdb -q -ex "symbol-file $(SYSROOT)$(BOOTDIR)/myos.bin" -ex "target remote localhost:1234"
+
 clean:
 	@find . -type f \( -name '*.o' -o -name '*.bin' -o -name '*.d' -o -name '*.iso' -o -name '*.a' \) -exec rm {} \;
 	@rm -rf $(SYSROOT)
