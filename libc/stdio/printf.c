@@ -34,6 +34,11 @@ int printf(const char *format, ...)
 					written++;
 				}
 				break;
+			case 'n':
+				isInFormat = false;
+				int *count = va_arg(parameters, int*);
+				*count = written;
+				break;
 			}
 		} else {
 			if (c == '%') {
