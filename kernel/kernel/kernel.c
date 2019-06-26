@@ -1,5 +1,4 @@
 #include <stdbool.h>
-#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -17,8 +16,8 @@ void kernel_main(void)
 
 	for (size_t i = 0; i < 16; ++i) {
 		tty_setcolor(i, VGA_BLACK);
-		puts("Colored Text on Black ");
+		printf("Colored Text on Black ");
 		tty_setcolor(VGA_BLACK, i);
-		puts("Black Text on Colored Background");
+		printf("Black Text on Colored Background\n");
 	}
 }

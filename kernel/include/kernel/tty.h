@@ -1,3 +1,5 @@
+#include <stddef.h>
+
 /* Hardware text mode color constants. */
 enum vga_color {
 	VGA_BLACK = 0,
@@ -22,4 +24,4 @@ void tty_init(void);
 void tty_setcolor(enum vga_color fg, enum vga_color bg);
 void tty_scroll(void);
 void tty_putchar(char);
-void tty_print(const char *str);
+size_t tty_print(const char *str);

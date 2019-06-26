@@ -68,8 +68,12 @@ void tty_putchar(char c)
 		tty_scroll();
 }
 
-void tty_print(const char *data)
+size_t tty_print(const char *data)
 {
-	while(*data)
-		tty_putchar(*data++);
+	size_t len = 0;
+
+	while(data[len])
+		tty_putchar(data[len++]);
+
+	return len;
 }

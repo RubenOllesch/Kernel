@@ -1,7 +1,8 @@
 LIBS=libk.a
 
 LIBK_OBJS=stdio/puts.o \
-	stdio/putchar.o
+	stdio/putchar.o \
+	stdio/printf.o
 
 
 libk.a:	$(LIBK_OBJS)
