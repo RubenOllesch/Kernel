@@ -50,7 +50,7 @@ void tty_init(void)
 			term_putentryat(0, x, y);
 }
 
-static void term_putchar(char c)
+void tty_putchar(char c)
 {
 	if (c == '\n') {
 		term_column = 0;
@@ -71,5 +71,5 @@ static void term_putchar(char c)
 void tty_print(const char *data)
 {
 	while(*data)
-		term_putchar(*data++);
+		tty_putchar(*data++);
 }

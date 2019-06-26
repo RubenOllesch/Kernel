@@ -21,4 +21,5 @@ enum vga_color {
 void tty_init(void);
 void tty_setcolor(enum vga_color fg, enum vga_color bg);
 void tty_scroll(void);
+void tty_putchar(char);
 void tty_print(const char *str);
