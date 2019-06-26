@@ -1,5 +1,3 @@
-.PHONY:	all install-headers install-kernel iso start clean
-
 CFLAGS?=-Wall -Wextra -O2
 
 HOST=i686-elf
@@ -34,13 +32,13 @@ install:
 		$(MAKE) --no-print-directory -C $$dir install; \
 	done
 
-iso:	all
+myos.iso:	all
 	@echo "Creating kernel ISO image..."
 	@mkdir -p $(SYSROOT)/$(BOOTDIR)/grub
 	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}'	> $(SYSROOT)/$(BOOTDIR)/grub/grub.cfg
 	@grub-mkrescue -o myos.iso $(SYSROOT)
 
-start: iso
+start: myos.iso
 	@qemu-system-i386 -cdrom myos.iso
 
 clean:
