@@ -17,29 +17,27 @@ int printf(const char *format, ...)
 		if (isInFormat) {
 			switch (c) {
 			case '%':
-				isInFormat = false;
 				putchar('%');
 				written++;
 				break;
 			case 'c':
-				isInFormat = false;
 				putchar(va_arg(parameters, int));
 				written++;
 				break;
-			case 's':
-				isInFormat = false;
+			case 's':;
 				const char *str = va_arg(parameters, const char*);
 				while (*str) {
 					putchar(*str++);
 					written++;
 				}
 				break;
-			case 'n':
-				isInFormat = false;
+			case 'n':;
 				int *count = va_arg(parameters, int*);
 				*count = written;
 				break;
 			}
+
+			isInFormat = false;
 		} else {
 			if (c == '%') {
 				isInFormat = true;
