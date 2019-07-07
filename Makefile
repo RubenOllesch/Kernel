@@ -35,7 +35,7 @@ install:
 myos.iso:	all
 	@echo "Creating kernel ISO image..."
 	@mkdir -p $(SYSROOT)$(BOOTDIR)/grub
-	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}'	> $(SYSROOT)$(BOOTDIR)/grub/grub.cfg
+	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}' > $(SYSROOT)$(BOOTDIR)/grub/grub.cfg
 	@grub-mkrescue -o myos.iso $(SYSROOT)
 
 start: myos.iso

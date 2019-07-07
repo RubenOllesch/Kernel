@@ -13,7 +13,7 @@ int printf(const char *format, ...)
 	char c;
 	bool isInFormat = false;
 
-	while ((c= *format++)) {
+	while ((c = *format++)) {
 		if (isInFormat) {
 			switch (c) {
 			case '%':

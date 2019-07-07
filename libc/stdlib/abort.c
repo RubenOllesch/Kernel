@@ -7,7 +7,7 @@ void abort(void)
 {
 #ifdef __is_libk
 	tty_setcolor(VGA_BLACK, VGA_RED);
-	printf("\nKernel: panic");
+	printf("\nKernel panic");
 	// TODO add core dump, etc..
 #else
 	// TODO user-space abort
