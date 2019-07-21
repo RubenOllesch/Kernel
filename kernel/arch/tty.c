@@ -54,6 +54,13 @@ void tty_putchar(char c)
 		term_column = 0;
 		term_row++;
 		break;
+	case '\r':
+		term_column = 0;
+		break;
+	case '\v':
+	case '\f':
+		term_row++;
+		break;
 	default:
 		term_putentryat(c, term_column, term_row);
 		if (++term_column == VGA_WIDTH)
