@@ -49,15 +49,15 @@ void tty_init(void)
 
 void tty_putchar(char c)
 {
-	if (c == '\n') {
+	switch (c) {
+	case '\n':
 		term_column = 0;
 		term_row++;
-	} else {
+		break;
+	default:
 		term_putentryat(c, term_column, term_row);
-		if (++term_column == VGA_WIDTH) {
-			term_column = 0;
-			term_row++;
-		}
+		if (++term_column == VGA_WIDTH)
+			tty_putchar('\n');
 	}
 
 
