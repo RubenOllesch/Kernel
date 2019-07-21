@@ -54,6 +54,9 @@ void tty_putchar(char c)
 		term_column = 0;
 		term_row++;
 		break;
+	case '\t':
+		term_column = (term_column + TAB_WIDTH) - (term_column % TAB_WIDTH);
+		break;
 	case '\r':
 		term_column = 0;
 		break;

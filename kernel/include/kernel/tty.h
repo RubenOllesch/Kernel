@@ -6,6 +6,9 @@
 
 #define	VGA_BUFFER	0xB8000
 
+
+#define TAB_WIDTH	8
+
 enum vga_color {
 	VGA_BLACK = 0,
 	VGA_BLUE = 1,
