@@ -38,6 +38,10 @@ myos.iso:	install-headers install
 	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}' > $(SYSROOT)$(BOOTDIR)/grub/grub.cfg
 	@grub-mkrescue -o myos.iso $(SYSROOT)
 
+
+start-kernel: myos.iso
+	@qemu-system-i386 -kernel $(SYSROOT)$(BOOTDIR)/myos.bin
+
 start: myos.iso
 	@qemu-system-i386 -cdrom myos.iso
 
