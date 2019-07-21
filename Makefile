@@ -20,7 +20,7 @@ CFLAGS:=$(CFLAGS) -ffreestanding
 export 
 
 
-all:	install-headers install
+all:	myos.iso
 
 install-headers:
 	@for dir in $(PROJECTDIRS); do \
@@ -32,7 +32,7 @@ install:
 		$(MAKE) --no-print-directory -C $$dir install; \
 	done
 
-myos.iso:	all
+myos.iso:	install-headers install
 	@echo "Creating kernel ISO image..."
 	@mkdir -p $(SYSROOT)$(BOOTDIR)/grub
 	@echo -e 'menuentry "myos" {\n\tmultiboot $(BOOTDIR)/myos.bin\n}' > $(SYSROOT)$(BOOTDIR)/grub/grub.cfg
