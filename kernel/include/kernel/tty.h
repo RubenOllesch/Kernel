@@ -1,6 +1,11 @@
 #include <stddef.h>
 
-/* Hardware text mode color constants. */
+
+#define	VGA_WIDTH	80
+#define	VGA_HEIGHT	25
+
+#define	VGA_BUFFER	0xB8000
+
 enum vga_color {
 	VGA_BLACK = 0,
 	VGA_BLUE = 1,

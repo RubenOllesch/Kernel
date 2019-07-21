@@ -5,10 +5,7 @@
 #include "kernel/tty.h"
 
 
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
-
-static uint16_t *term_buff = (uint16_t*) 0xB8000;
+static uint16_t *term_buff = (uint16_t*) VGA_BUFFER;
 size_t term_row;
 size_t term_column;
 uint8_t term_color;
