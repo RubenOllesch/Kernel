@@ -1,5 +1,8 @@
 CFLAGS?=-O2 -Wall -Wextra -Wpedantic
 
+TOOLCHAIN=$(PWD)/toolchain
+TOOLCHAINPATH=$(TOOLCHAIN)/bin
+
 HOST=i686-elf
 SYSROOT=$(PWD)/sysroot
 
@@ -10,7 +13,10 @@ LIBDIR=$(PREFIX)/lib
 
 PROJECTDIRS=libc kernel
 
-CC=$(HOST)-gcc
+
+AR=$(TOOLCHAINPATH)/$(HOST)-ar
+CC=$(TOOLCHAINPATH)/$(HOST)-gcc
+
 CC:=$(CC) --sysroot=$(SYSROOT)
 # Work around because the -elf utils were not build with --with-sysroot
 CC:=$(CC) -isystem=$(INCLUDEDIR)

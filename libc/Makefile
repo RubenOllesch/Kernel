@@ -1,5 +1,3 @@
-AR=$(HOST)-ar
-
 LIBS=libk.a
 
 FREEOBJS=stdio/puts.o \

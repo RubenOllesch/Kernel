@@ -3,5 +3,6 @@
 *.a
 *.bin
 *.iso
+toolchain
 sysroot
 .vscode
