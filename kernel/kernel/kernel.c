@@ -38,4 +38,7 @@ void kernel_main(void)
 	tty_setcolor(VGA_LIGHT_GREY, VGA_BLACK);
 
 	puts(samplesource);
+
+	printf("%x\n", 0xabcdf00f);
+	printf("%X\n", 0xabcdf00f);
 }
